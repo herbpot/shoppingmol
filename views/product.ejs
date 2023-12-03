@@ -1,0 +1,25 @@
+<%- include('./header.ejs') %>
+<div>
+    <img id="mainImg" src="<%= data.titleImg %>" alt="">
+    <div id="mainImgs">
+        <% data.mainImgs.split('/').forEach(i => { %>
+            <img class="mainImgs" src="<%= i %>" alt="">
+        <% }) %>
+    </div>
+    <h2 id="productName"><%=data.name%></h2>
+    <small id="productDiscription"><%=data.discription%></small>
+    <div>
+        <h2 id="price"><%=data.price%></h2>
+        <% if(isLogin){ %>
+            <h2 onclick="location.href += 'buket/<%= data.id %>'"></h2>
+        <% }else{ %>
+            <h2 onclick="alert('로그인 후 이용하세요!')"></h2>
+        <% } %>
+    </div>
+    <div id="subImgs">
+        <% data.subImgs.split('/').forEach(i => { %>
+            <img class="subImgs" src="<%= i %>" alt="">
+        <% }) %>
+    </div>
+</div>
+<%- include('./footer.ejs') %>

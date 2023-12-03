@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <title>shoppingmol</title>
+</head>
+<body>
+    <div id="stateBar" class="bar state">
+        <h3>Shoppingmol</h3>
+        <% if (!isLogin) {%>
+            <div>
+                <h4 class="login" id="login" onclick="location += 'login'">
+                    로그인
+                </h4>
+                <h4 class="login" id="signup" onclick="location += 'signup'">
+                    회원가입
+                </h4>
+            </div>
+        <%} else {%>
+            <div>
+                <h4 onclick="location += 'user/<%= user.id %>'"><%= user.name %></h4>
+                <h4 onclick="location += 'buket/<%= user.id %>'">장바구니</h4>
+            </div>
+        <%}%>
+    </div>
+    <div id="catalogBar" class="bar">
+        <div id="cpu">CPU</div>
+        <div id="ram">RAM</div>
+        <div id="gpu">GPU</div>
+        <div id="mainboard">MAINBOARD</div>
+        <div id="SSD">SSD</div>
+        <div id="HDD">HDD</div>
+        <div id="case">CASE</div>
+        <div id="cooler">COOLER</div>
+    </div>
+    <div id="content">

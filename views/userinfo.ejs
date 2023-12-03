@@ -1,0 +1,11 @@
+<%- include('./header.ejs') %>
+<div>
+    <form class="loginForm" action="/user/<%= data.id %>" method="post">
+        <small>이름</small><input type="text" value="<%= data.name %>" disabled >
+        <small>전화번호</small><input type="number" value="<%= data.phoneNumber %>" disabled>
+        <small>아이디</small><input name="idid" type="text" placeholder="아이디를 입력하세요" value="<%= data.nick %>">
+        <small>비밀번호</small><input name="pwpw" type="password" placeholder="비밀번호를 입력하세요" value="<%= data.pw %>">
+        <input type="submit" value="update">
+    </form> 
+</div>
+<%- include('./footer.ejs') %>
