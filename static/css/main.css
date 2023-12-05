@@ -39,3 +39,23 @@ body {
     margin-top: 50px;
     padding: 20%;
 }
+
+.bucketProduct {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 10%;
+    border: 2px silver solid
+}
+.bucketProduct > img {
+    width: 100px;
+    height: auto;
+}
+.bucketProduct > div {
+    display: flex;
+}
+.bucketProduct > div> small {
+    margin-block: auto;
+}
+.bucketProduct > div > h2 {
+    margin-inline: 10px;
+}

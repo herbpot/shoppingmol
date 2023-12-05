@@ -11,28 +11,28 @@
         <h3>Shoppingmol</h3>
         <% if (!isLogin) {%>
             <div>
-                <h4 class="login" id="login" onclick="location += 'login'">
+                <h4 class="login" id="login" onclick="location.pathname = '/login'">
                     로그인
                 </h4>
-                <h4 class="login" id="signup" onclick="location += 'signup'">
+                <h4 class="login" id="signup" onclick="location.pathname = '/signup'">
                     회원가입
                 </h4>
             </div>
         <%} else {%>
             <div>
-                <h4 onclick="location += 'user/<%= user.id %>'"><%= user.name %></h4>
-                <h4 onclick="location += 'buket/<%= user.id %>'">장바구니</h4>
+                <h4 onclick="location.pathname = '/user/<%= user.id %>'"><%= user.name %></h4>
+                <h4 onclick="location.pathname = '/buket/<%= user.id %>'">장바구니</h4>
             </div>
         <%}%>
     </div>
     <div id="catalogBar" class="bar">
-        <div id="cpu">CPU</div>
-        <div id="ram">RAM</div>
-        <div id="gpu">GPU</div>
-        <div id="mainboard">MAINBOARD</div>
-        <div id="SSD">SSD</div>
-        <div id="HDD">HDD</div>
-        <div id="case">CASE</div>
-        <div id="cooler">COOLER</div>
+        <div onclick="location.pathname = 'cpu'" id="cpu">CPU</div>
+        <div onclick="location.pathname = 'ram'" id="ram">RAM</div>
+        <div onclick="location.pathname = 'gpu'" id="gpu">GPU</div>
+        <div onclick="location.pathname = 'mainboard'" id="mainboard">MAINBOARD</div>
+        <div onclick="location.pathname = 'ssd'" id="SSD">SSD</div>
+        <div onclick="location.pathname = 'hdd'" id="HDD">HDD</div>
+        <div onclick="location.pathname = 'case'" id="case">CASE</div>
+        <div onclick="location.pathname = 'cooler'" id="cooler">COOLER</div>
     </div>
     <div id="content">

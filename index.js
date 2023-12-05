@@ -32,9 +32,10 @@ function chunk(data = [], size = 4) {
   }
 
 db.serialize(() => {
+    // db.exec('drop table product')
     db.exec('create table if not exists product(id integer primary key autoincrement, name string, description string, price integer, titleImg string, mainImgs string, subImgs string, tag string);')
     db.exec('create table if not exists users(id integer primary key autoincrement, name string, nick string, phoneNumber string, pw string);')
-    // db.exec('insert into product(name, description, price, titleImg, mainImgs, subImgs) values ("test", "test", 1, "non", "non", "non")')
+    // db.exec('insert into product(name, description, price, titleImg, mainImgs, subImgs, tag) values ("test", "test", 1, "non", "non", "non", "test")')
     db.all('select * from users', (err,rows) => {
         console.log(rows);
     })
@@ -49,11 +50,19 @@ app.use(express.urlencoded( { extended: true } ))
 
 app.get('/', (req,res) => {
     db.all(`select * from product`, (err, rows) => {
-        console.log(req.session);
         req.session.isLogin = req.session.user != undefined ? true : false
         req.session.save(() => {
             res.render('main.ejs', {data: chunk(rows), isLogin: req.session.isLogin, user: req.session.user})
         })
+    })
+})
+
+app.get('/:tag', (req,res) => {
+    db.all(`select * from product where tag='${req.params.tag}'`, (err,rows) => {
+        if (err || rows.length == 0) res.redirect('/')
+        else {
+            res.render('main.ejs', {data: chunk(rows), isLogin: req.session.isLogin, user: req.session.user})
+        }
     })
 })
 
@@ -107,17 +116,34 @@ app.post('/user/:id', (req,res) => {
     res.redirect('/user/'+req.params.id)
 })
 
-app.get('/buket/:id', (req,res) => { //여기 구현해야함
-    res.render('')
+app.get('/buket', (req,res) => {
+    if (req.session.buket != undefined){ 
+        buket = [...req.session.buket]
+        q = `select * from product where id=${buket.pop()}`
+        buket.forEach(e => {
+            q += `or id=${e}`
+        });
+        console.log(q);
+        db.all(q, (err, rows) => {
+            console.log(err,rows, req.session.buket)
+            res.render('buket.ejs', {data: rows, isLogin: req.session.isLogin, user: req.session.user})
+        })
+    }else{
+        res.write('alert("장바구니에 담은 상품이 없습니다"); location.pathname="/"')
+    }
 })
 
 app.post('/buket/:id', (req,res) => {
     if (req.session.buket == undefined) req.session.buket = []
-    req.session.buket.push(id)
+    req.session.buket.push(req.params.id)
     req.session.save(() => {
-        res.redirect('/buket'+req.session.user.id)
+        res.redirect('/buket')
     })
     
+})
+
+app.post('/purchase', (req,res) => {
+    res.write('alert("실제 구매까지는 구현하지 않았습니다")')
 })
 
 app.listen(8080, () => {

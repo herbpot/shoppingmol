@@ -1,0 +1,20 @@
+<%- include('./header.ejs') %>
+<div>
+  <div id="productList">
+    <form action="/purchase" method="post">
+      <% data.forEach(i => { %>
+        <div class="bucketProduct" id="product">
+          <input type="checkbox" name="<%= i.id %>" id="<%= i.id %>">
+          <img src="<%= i.titleImg %>" alt="no image">
+          <div>
+            <h2 id="name"><%=i.name%></h2>
+            <h2 id="price"><%=i.price%></h2>
+            <small id="discription"><%=i.description%></small>
+          </div>
+        </div>
+      <% }) %>
+    </form>
+  </div>
+  <h4>구매하기</h4>
+</div>
+<%- include('./footer.ejs') %>

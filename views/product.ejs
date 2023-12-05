@@ -11,9 +11,11 @@
     <div>
         <h2 id="price"><%=data.price%></h2>
         <% if(isLogin){ %>
-            <h2 onclick="location.href += 'buket/<%= data.id %>'"></h2>
+            <form action="/buket/<%= data.id %>" method="post">
+                <input type="submit" value="구매하기"/>
+            </form>
         <% }else{ %>
-            <h2 onclick="alert('로그인 후 이용하세요!')"></h2>
+            <h2 onclick="alert('로그인 후 이용하세요!')">구매하기</h2>
         <% } %>
     </div>
     <div id="subImgs">
